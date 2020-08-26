@@ -3,6 +3,7 @@ package com.petstore.model;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Table(name = "stores")
@@ -28,6 +29,9 @@ public class Store {
 
     @Column(nullable = false)
     private String country;
+
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "petStore", fetch = FetchType.EAGER)
+    private List<Pet> petList;
 
     public Integer getId() {
         return id;
@@ -83,5 +87,20 @@ public class Store {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public List<Pet> getPetList() {
+        return petList;
+    }
+
+    public void setPetList(List<Pet> petList) {
+        this.petList = petList;
+    }
+
+    public void addPet(Pet pet) {
+        if (this.petList == null) {
+            this.petList = new ArrayList<>();
+        }
+        this.petList.add(pet);
     }
 }
