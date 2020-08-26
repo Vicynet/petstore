@@ -1,16 +1,18 @@
 package com.petstore.model;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "pet")
+@Table(name = "pets")
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 50, unique = true)
+    @Column(nullable = false, length = 50)
     private String name;
 
     @Column(nullable = false)
@@ -83,6 +85,19 @@ public class Pet {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Pet{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", breed='" + breed + '\'' +
+                ", sex=" + sex +
+                ", age=" + age +
+                ", birthDate=" + birthDate +
+                '}';
     }
 }
 

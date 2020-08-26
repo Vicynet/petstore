@@ -1,12 +1,15 @@
 package com.petstore.model;
 
-import javax.persistence.*;
+import org.hibernate.annotations.DynamicUpdate;
 
-@Entity @Table(name = "store")
+import javax.persistence.*;
+import java.util.List;
+
+@Entity @Table(name = "stores")
 public class Store {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
 
     @Column(nullable = false)
     private String storeName;
@@ -26,11 +29,11 @@ public class Store {
     @Column(nullable = false)
     private String country;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
